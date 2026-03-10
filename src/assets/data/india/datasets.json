@@ -1,0 +1,37 @@
+{
+  "country": "india",
+  "countryName": "India",
+  "datasets": [
+    {
+      "id": "eight-core-industries",
+      "name": "Index of Eight Core Industries",
+      "shortName": "8 Core Industries",
+      "icon": "factory",
+      "latestPeriod": "Jan 2026",
+      "latestGrowth": 4.0,
+      "cumulativeGrowth": 2.8,
+      "cumulativePeriod": "Apr-Jan 2025-26",
+      "status": "provisional",
+      "releaseDate": "2026-02-20",
+      "file": "eight-core-industries.json"
+    },
+    {
+      "id": "iip",
+      "name": "Index of Industrial Production",
+      "shortName": "IIP",
+      "icon": "precision_manufacturing",
+      "latestPeriod": "Coming soon",
+      "latestGrowth": null,
+      "status": "coming-soon"
+    },
+    {
+      "id": "import-export",
+      "name": "Import / Export Trade Data",
+      "shortName": "Trade Data",
+      "icon": "local_shipping",
+      "latestPeriod": "Coming soon",
+      "latestGrowth": null,
+      "status": "coming-soon"
+    }
+  ]
+}

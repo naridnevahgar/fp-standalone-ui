@@ -1,0 +1,90 @@
+@use '@angular/material' as mat;
+
+// --- Palettes ---
+$dark-primary: mat.define-palette(mat.$cyan-palette);
+$dark-accent: mat.define-palette(mat.$orange-palette);
+$dark-warn: mat.define-palette(mat.$red-palette);
+
+$light-primary: mat.define-palette(mat.$blue-palette);
+$light-accent: mat.define-palette(mat.$orange-palette);
+$light-warn: mat.define-palette(mat.$red-palette);
+
+// --- Themes ---
+$dark-theme: mat.define-dark-theme((
+  color: (primary: $dark-primary, accent: $dark-accent, warn: $dark-warn),
+  typography: mat.define-typography-config(),
+  density: 0,
+));
+
+$light-theme: mat.define-light-theme((
+  color: (primary: $light-primary, accent: $light-accent, warn: $light-warn),
+  typography: mat.define-typography-config(),
+  density: 0,
+));
+
+@include mat.all-component-typographies($dark-theme);
+
+html {
+  @include mat.all-component-themes($dark-theme);
+  color-scheme: dark;
+
+  &.light-theme {
+    @include mat.all-component-colors($light-theme);
+    color-scheme: light;
+  }
+}
+
+// --- Global Styles ---
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+body {
+  background: var(--mat-app-background-color, #1e1e1e);
+  color: var(--mat-app-text-color, #fff);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.light-theme body {
+  background: var(--mat-app-background-color, #fafafa);
+  color: var(--mat-app-text-color, #212121);
+}
+
+// Utility classes
+.page-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.section-title {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-bottom: 16px;
+  opacity: 0.87;
+}
+
+.trend-up {
+  color: #4caf50;
+}
+
+.trend-down {
+  color: #f44336;
+}
+
+.trend-flat {
+  color: #ff9800;
+}

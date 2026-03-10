@@ -1,0 +1,118 @@
+{
+  "id": "eight-core-industries",
+  "name": "Index of Eight Core Industries",
+  "shortName": "8 Core Industries",
+  "country": "india",
+  "baseYear": "2011-12",
+  "baseValue": 100,
+  "source": "Ministry of Commerce & Industry, DPIIT",
+  "releaseDate": "2026-02-20",
+  "nextRelease": "2026-03-20",
+  "description": "The ICI measures the combined and individual performance of production of eight core industries comprising 40.27% of the weight of IIP.",
+  "sectors": [
+    { "id": "coal", "name": "Coal", "weight": 10.33 },
+    { "id": "crude-oil", "name": "Crude Oil", "weight": 8.98 },
+    { "id": "natural-gas", "name": "Natural Gas", "weight": 6.88 },
+    { "id": "refinery-products", "name": "Refinery Products", "weight": 28.04 },
+    { "id": "fertilizers", "name": "Fertilizers", "weight": 2.63 },
+    { "id": "steel", "name": "Steel", "weight": 17.92 },
+    { "id": "cement", "name": "Cement", "weight": 5.37 },
+    { "id": "electricity", "name": "Electricity", "weight": 19.85 }
+  ],
+  "monthly": [
+    {
+      "period": "2025-01",
+      "label": "Jan 2025",
+      "index": { "coal": 229.8, "crude-oil": 77.9, "natural-gas": 78.1, "refinery-products": 147.2, "fertilizers": 139.0, "steel": 228.1, "cement": 219.7, "electricity": 201.7, "overall": 173.8 },
+      "growth": { "coal": 4.6, "crude-oil": -1.1, "natural-gas": -1.5, "refinery-products": 8.3, "fertilizers": 3.0, "steel": 4.7, "cement": 14.3, "electricity": 2.3, "overall": 5.1 }
+    },
+    {
+      "period": "2025-02",
+      "label": "Feb 2025",
+      "index": { "coal": 215.6, "crude-oil": 69.7, "natural-gas": 70.0, "refinery-products": 133.5, "fertilizers": 124.9, "steel": 216.8, "cement": 215.1, "electricity": 194.0, "overall": 163.0 },
+      "growth": { "coal": 1.7, "crude-oil": -5.2, "natural-gas": -6.0, "refinery-products": 0.8, "fertilizers": 10.2, "steel": 6.9, "cement": 10.7, "electricity": 3.6, "overall": 3.4 }
+    },
+    {
+      "period": "2025-03",
+      "label": "Mar 2025",
+      "index": { "coal": 260.2, "crude-oil": 77.4, "natural-gas": 69.2, "refinery-products": 147.3, "fertilizers": 126.9, "steel": 238.9, "cement": 246.2, "electricity": 219.5, "overall": 182.9 },
+      "growth": { "coal": 1.6, "crude-oil": -1.9, "natural-gas": -12.7, "refinery-products": 0.2, "fertilizers": 8.8, "steel": 8.7, "cement": 12.2, "electricity": 7.5, "overall": 4.5 }
+    },
+    {
+      "period": "2025-04",
+      "label": "Apr 2025",
+      "index": { "coal": 179.3, "crude-oil": 74.2, "natural-gas": 74.1, "refinery-products": 131.7, "fertilizers": 112.9, "steel": 219.2, "cement": 204.5, "electricity": 215.7, "overall": 163.3 },
+      "growth": { "coal": 3.5, "crude-oil": -2.8, "natural-gas": -0.9, "refinery-products": -4.5, "fertilizers": -4.2, "steel": 4.4, "cement": 6.3, "electricity": 1.7, "overall": 1.0 }
+    },
+    {
+      "period": "2025-05",
+      "label": "May 2025",
+      "index": { "coal": 189.8, "crude-oil": 76.5, "natural-gas": 75.9, "refinery-products": 143.3, "fertilizers": 127.9, "steel": 225.3, "cement": 209.0, "electricity": 218.5, "overall": 170.2 },
+      "growth": { "coal": 2.8, "crude-oil": -1.8, "natural-gas": -3.6, "refinery-products": 1.1, "fertilizers": -5.9, "steel": 7.4, "cement": 9.7, "electricity": -4.7, "overall": 1.2 }
+    },
+    {
+      "period": "2025-06",
+      "label": "Jun 2025",
+      "index": { "coal": 173.7, "crude-oil": 73.5, "natural-gas": 73.7, "refinery-products": 138.6, "fertilizers": 132.4, "steel": 223.8, "cement": 214.7, "electricity": 220.1, "overall": 167.3 },
+      "growth": { "coal": -6.8, "crude-oil": -1.2, "natural-gas": -2.8, "refinery-products": 3.4, "fertilizers": -1.2, "steel": 9.7, "cement": 8.2, "electricity": -1.2, "overall": 2.2 }
+    },
+    {
+      "period": "2025-07",
+      "label": "Jul 2025",
+      "index": { "coal": 143.0, "crude-oil": 75.6, "natural-gas": 75.5, "refinery-products": 141.7, "fertilizers": 141.6, "steel": 239.1, "cement": 194.8, "electricity": 228.4, "overall": 168.9 },
+      "growth": { "coal": -12.3, "crude-oil": -1.3, "natural-gas": -3.2, "refinery-products": -1.1, "fertilizers": 2.0, "steel": 16.6, "cement": 11.6, "electricity": 3.7, "overall": 3.7 }
+    },
+    {
+      "period": "2025-08",
+      "label": "Aug 2025",
+      "index": { "coal": 153.9, "crude-oil": 77.5, "natural-gas": 75.7, "refinery-products": 138.0, "fertilizers": 143.8, "steel": 234.6, "cement": 186.9, "electricity": 221.1, "overall": 166.5 },
+      "growth": { "coal": 11.4, "crude-oil": 2.4, "natural-gas": -2.2, "refinery-products": 3.0, "fertilizers": 4.6, "steel": 13.6, "cement": 5.4, "electricity": 4.1, "overall": 6.5 }
+    },
+    {
+      "period": "2025-09",
+      "label": "Sep 2025",
+      "index": { "coal": 150.0, "crude-oil": 71.1, "natural-gas": 72.9, "refinery-products": 129.2, "fertilizers": 137.0, "steel": 231.0, "cement": 187.7, "electricity": 213.3, "overall": 160.5 },
+      "growth": { "coal": -1.2, "crude-oil": -1.3, "natural-gas": -3.8, "refinery-products": -3.7, "fertilizers": 1.6, "steel": 14.4, "cement": 5.0, "electricity": 3.1, "overall": 3.3 }
+    },
+    {
+      "period": "2025-10",
+      "label": "Oct 2025",
+      "index": { "coal": 170.1, "crude-oil": 73.7, "natural-gas": 75.3, "refinery-products": 141.7, "fertilizers": 147.0, "steel": 225.5, "cement": 196.9, "electricity": 193.4, "overall": 162.3 },
+      "growth": { "coal": -8.5, "crude-oil": -1.2, "natural-gas": -5.0, "refinery-products": 4.6, "fertilizers": 7.4, "steel": 5.9, "cement": 5.2, "electricity": -6.9, "overall": -0.1 }
+    },
+    {
+      "period": "2025-11",
+      "label": "Nov 2025",
+      "index": { "coal": 203.8, "crude-oil": 71.5, "natural-gas": 73.8, "refinery-products": 137.1, "fertilizers": 143.8, "steel": 227.2, "cement": 202.8, "electricity": 181.3, "overall": 162.4 },
+      "growth": { "coal": 2.1, "crude-oil": -3.2, "natural-gas": -2.5, "refinery-products": -0.9, "fertilizers": 5.6, "steel": 6.7, "cement": 14.6, "electricity": -1.5, "overall": 2.1 }
+    },
+    {
+      "period": "2025-12",
+      "label": "Dec 2025",
+      "index": { "coal": 222.8, "crude-oil": 73.5, "natural-gas": 74.7, "refinery-products": 147.6, "fertilizers": 145.5, "steel": 244.1, "cement": 240.8, "electricity": 204.9, "overall": 177.3 },
+      "growth": { "coal": 3.6, "crude-oil": -5.6, "natural-gas": -4.4, "refinery-products": -1.0, "fertilizers": 4.1, "steel": 10.1, "cement": 13.7, "electricity": 6.3, "overall": 4.7 }
+    },
+    {
+      "period": "2026-01",
+      "label": "Jan 2026",
+      "provisional": true,
+      "index": { "coal": 236.9, "crude-oil": 73.4, "natural-gas": 74.2, "refinery-products": 147.2, "fertilizers": 144.2, "steel": 250.6, "cement": 243.1, "electricity": 209.4, "overall": 180.8 },
+      "growth": { "coal": 3.1, "crude-oil": -5.8, "natural-gas": -5.0, "refinery-products": 0.0, "fertilizers": 3.7, "steel": 9.9, "cement": 10.7, "electricity": 3.8, "overall": 4.0 }
+    }
+  ],
+  "yearly": [
+    { "year": "2012-13", "index": { "coal": 103.2, "crude-oil": 99.4, "natural-gas": 85.6, "refinery-products": 107.2, "fertilizers": 96.7, "steel": 107.9, "cement": 107.5, "electricity": 104.0, "overall": 103.8 }, "growth": { "coal": 3.2, "crude-oil": -0.6, "natural-gas": -14.4, "refinery-products": 7.2, "fertilizers": -3.3, "steel": 7.9, "cement": 7.5, "electricity": 4.0, "overall": 3.8 } },
+    { "year": "2013-14", "index": { "coal": 104.2, "crude-oil": 99.2, "natural-gas": 74.5, "refinery-products": 108.6, "fertilizers": 98.1, "steel": 115.8, "cement": 111.5, "electricity": 110.3, "overall": 106.5 }, "growth": { "coal": 1.0, "crude-oil": -0.2, "natural-gas": -12.9, "refinery-products": 1.4, "fertilizers": 1.5, "steel": 7.3, "cement": 3.7, "electricity": 6.1, "overall": 2.6 } },
+    { "year": "2014-15", "index": { "coal": 112.6, "crude-oil": 98.4, "natural-gas": 70.5, "refinery-products": 108.8, "fertilizers": 99.4, "steel": 121.7, "cement": 118.1, "electricity": 126.6, "overall": 111.7 }, "growth": { "coal": 8.0, "crude-oil": -0.9, "natural-gas": -5.3, "refinery-products": 0.2, "fertilizers": 1.3, "steel": 5.1, "cement": 5.9, "electricity": 14.8, "overall": 4.9 } },
+    { "year": "2015-16", "index": { "coal": 118.0, "crude-oil": 97.0, "natural-gas": 67.2, "refinery-products": 114.1, "fertilizers": 106.4, "steel": 120.2, "cement": 123.5, "electricity": 133.8, "overall": 115.1 }, "growth": { "coal": 4.8, "crude-oil": -1.4, "natural-gas": -4.7, "refinery-products": 4.9, "fertilizers": 7.0, "steel": -1.3, "cement": 4.6, "electricity": 5.7, "overall": 3.0 } },
+    { "year": "2016-17", "index": { "coal": 121.8, "crude-oil": 94.5, "natural-gas": 66.5, "refinery-products": 119.7, "fertilizers": 106.6, "steel": 133.1, "cement": 122.0, "electricity": 141.6, "overall": 120.5 }, "growth": { "coal": 3.2, "crude-oil": -2.5, "natural-gas": -1.0, "refinery-products": 4.9, "fertilizers": 0.2, "steel": 10.7, "cement": -1.2, "electricity": 5.8, "overall": 4.8 } },
+    { "year": "2017-18", "index": { "coal": 124.9, "crude-oil": 93.7, "natural-gas": 68.4, "refinery-products": 125.2, "fertilizers": 106.6, "steel": 140.5, "cement": 129.7, "electricity": 149.2, "overall": 125.7 }, "growth": { "coal": 2.6, "crude-oil": -0.9, "natural-gas": 2.9, "refinery-products": 4.6, "fertilizers": 0.03, "steel": 5.6, "cement": 6.3, "electricity": 5.3, "overall": 4.3 } },
+    { "year": "2018-19", "index": { "coal": 134.1, "crude-oil": 89.8, "natural-gas": 69.0, "refinery-products": 129.1, "fertilizers": 107.0, "steel": 147.7, "cement": 147.0, "electricity": 156.9, "overall": 131.2 }, "growth": { "coal": 7.4, "crude-oil": -4.1, "natural-gas": 0.8, "refinery-products": 3.1, "fertilizers": 0.3, "steel": 5.1, "cement": 13.3, "electricity": 5.2, "overall": 4.4 } },
+    { "year": "2019-20", "index": { "coal": 133.6, "crude-oil": 84.5, "natural-gas": 65.1, "refinery-products": 129.4, "fertilizers": 109.8, "steel": 152.6, "cement": 145.7, "electricity": 158.4, "overall": 131.6 }, "growth": { "coal": -0.4, "crude-oil": -5.9, "natural-gas": -5.6, "refinery-products": 0.2, "fertilizers": 2.7, "steel": 3.4, "cement": -0.9, "electricity": 0.9, "overall": 0.4 } },
+    { "year": "2020-21", "index": { "coal": 131.1, "crude-oil": 80.1, "natural-gas": 59.8, "refinery-products": 114.9, "fertilizers": 111.6, "steel": 139.4, "cement": 130.0, "electricity": 157.6, "overall": 123.2 }, "growth": { "coal": -1.9, "crude-oil": -5.2, "natural-gas": -8.2, "refinery-products": -11.2, "fertilizers": 1.7, "steel": -8.7, "cement": -10.8, "electricity": -0.5, "overall": -6.4 } },
+    { "year": "2021-22", "index": { "coal": 142.3, "crude-oil": 77.9, "natural-gas": 71.3, "refinery-products": 125.1, "fertilizers": 112.4, "steel": 163.0, "cement": 156.9, "electricity": 170.1, "overall": 136.1 }, "growth": { "coal": 8.5, "crude-oil": -2.6, "natural-gas": 19.2, "refinery-products": 8.9, "fertilizers": 0.7, "steel": 16.9, "cement": 20.8, "electricity": 8.0, "overall": 10.4 } },
+    { "year": "2022-23", "index": { "coal": 163.5, "crude-oil": 76.6, "natural-gas": 72.4, "refinery-products": 131.2, "fertilizers": 125.1, "steel": 178.1, "cement": 170.6, "electricity": 185.2, "overall": 146.7 }, "growth": { "coal": 14.8, "crude-oil": -1.7, "natural-gas": 1.6, "refinery-products": 4.8, "fertilizers": 11.3, "steel": 9.3, "cement": 8.7, "electricity": 8.9, "overall": 7.8 } },
+    { "year": "2023-24", "index": { "coal": 182.7, "crude-oil": 77.1, "natural-gas": 76.8, "refinery-products": 135.9, "fertilizers": 129.8, "steel": 200.4, "cement": 185.7, "electricity": 198.3, "overall": 157.8 }, "growth": { "coal": 11.8, "crude-oil": 0.6, "natural-gas": 6.1, "refinery-products": 3.6, "fertilizers": 3.7, "steel": 12.5, "cement": 8.9, "electricity": 7.1, "overall": 7.6 } },
+    { "year": "2024-25", "index": { "coal": 192.0, "crude-oil": 75.4, "natural-gas": 75.9, "refinery-products": 139.7, "fertilizers": 133.5, "steel": 214.1, "cement": 197.4, "electricity": 208.6, "overall": 164.9 }, "growth": { "coal": 5.1, "crude-oil": -2.2, "natural-gas": -1.2, "refinery-products": 2.8, "fertilizers": 2.9, "steel": 6.8, "cement": 6.3, "electricity": 5.2, "overall": 4.5 } }
+  ]
+}
