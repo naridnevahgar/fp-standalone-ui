@@ -41,7 +41,7 @@ jobs:
         with:
           # If your Angular build outputs to dist/<app-name>, set path accordingly, e.g.:
           # path: dist/<app-name>
-          path: dist/fp-ui
+          path: dist/fp-ui/browser
 
   deploy:
     runs-on: ubuntu-latest
