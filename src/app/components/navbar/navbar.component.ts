@@ -2,10 +2,7 @@ import { Component, inject } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MatSelectModule } from '@angular/material/select';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ThemeService } from '../../services/theme.service';
 
@@ -16,10 +13,7 @@ import { ThemeService } from '../../services/theme.service';
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
-    MatSelectModule,
-    MatFormFieldModule,
     MatTooltipModule,
-    FormsModule,
   ],
   template: `
     <mat-toolbar class="navbar">
@@ -29,14 +23,6 @@ import { ThemeService } from '../../services/theme.service';
       </span>
 
       <span class="spacer"></span>
-
-      <mat-form-field class="country-select" appearance="outline" subscriptSizing="dynamic">
-        <mat-select [(value)]="selectedCountry" (selectionChange)="onCountryChange()">
-          @for (c of countries; track c.id) {
-            <mat-option [value]="c.id">{{ c.flag }} {{ c.name }}</mat-option>
-          }
-        </mat-select>
-      </mat-form-field>
 
       <button mat-icon-button (click)="themeService.toggle()" [matTooltip]="themeService.isDark() ? 'Switch to light' : 'Switch to dark'">
         <mat-icon>{{ themeService.isDark() ? 'light_mode' : 'dark_mode' }}</mat-icon>
@@ -64,32 +50,13 @@ import { ThemeService } from '../../services/theme.service';
     .spacer {
       flex: 1;
     }
-    .country-select {
-      width: 160px;
-      font-size: 0.9rem;
-    }
-    ::ng-deep .country-select .mat-mdc-form-field-infix {
-      padding-top: 8px !important;
-      padding-bottom: 8px !important;
-      min-height: unset !important;
-    }
   `]
 })
 export class NavbarComponent {
   themeService = inject(ThemeService);
   private router = inject(Router);
 
-  countries = [
-    { id: 'india', name: 'India', flag: '🇮🇳' },
-  ];
-
-  selectedCountry = 'india';
-
   goHome(): void {
-    this.router.navigate(['/dashboard', this.selectedCountry]);
-  }
-
-  onCountryChange(): void {
-    this.router.navigate(['/dashboard', this.selectedCountry]);
+    this.router.navigate(['/countries']);
   }
 }

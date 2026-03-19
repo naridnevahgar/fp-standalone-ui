@@ -1,13 +1,14 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { DataService, CountryDatasets } from '../../services/data.service';
-import { DatasetCardComponent } from '../../components/dataset-card/dataset-card.component';
+import { Component, OnInit, inject, signal } from '@angular/core';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { DataService, CountryDatasets } from '../../services/data.service';
+import { DatasetCardComponent } from './dataset-card.component';
 
 @Component({
-  selector: 'app-dashboard',
+  selector: 'app-dataset-catalog',
   standalone: true,
-  imports: [DatasetCardComponent, MatProgressSpinnerModule],
+  imports: [DatasetCardComponent, MatProgressSpinnerModule, MatButtonModule, RouterLink],
   template: `
     <div class="page-container">
       @if (loading()) {
@@ -15,8 +16,11 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
           <mat-spinner diameter="48"></mat-spinner>
         </div>
       } @else if (data()) {
-        <h2 class="section-title">{{ data()!.countryName }} — Macro Indicators</h2>
-        <p class="subtitle">Government-released economic datasets for macro trend analysis</p>
+        <div class="header-row">
+          <h2 class="section-title">{{ data()!.countryName }} — Dataset Catalog</h2>
+          <button mat-stroked-button [routerLink]="['/countries']">Back</button>
+        </div>
+        <p class="subtitle">Choose a dataset to open its opinionated analytics experience.</p>
 
         <div class="card-grid">
           @for (ds of data()!.datasets; track ds.id) {
@@ -32,14 +36,33 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
       justify-content: center;
       padding: 64px;
     }
+
     .subtitle {
-      opacity: 0.6;
+      opacity: 0.65;
       margin-bottom: 24px;
       font-size: 0.95rem;
     }
-  `]
+
+    .header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      margin: 0;
+    }
+
+    @media (max-width: 640px) {
+      .header-row {
+        flex-wrap: wrap;
+      }
+    }
+  `],
 })
-export class DashboardComponent implements OnInit {
+export class DatasetCatalogComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private dataService = inject(DataService);
 

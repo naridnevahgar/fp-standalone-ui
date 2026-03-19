@@ -1,14 +1,18 @@
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'dashboard/india', pathMatch: 'full' },
+  { path: '', redirectTo: 'countries', pathMatch: 'full' },
   {
-    path: 'dashboard/:country',
-    loadComponent: () => import('./pages/dashboard/dashboard.component').then(m => m.DashboardComponent),
+    path: 'countries',
+    loadComponent: () => import('./fp/country-selection/country-selection.component').then(m => m.CountrySelectionComponent),
   },
   {
-    path: 'dashboard/:country/dataset/:datasetId',
-    loadComponent: () => import('./pages/dataset-detail/dataset-detail.component').then(m => m.DatasetDetailComponent),
+    path: 'country/:country/datasets',
+    loadComponent: () => import('./fp/dataset-catalog/dataset-catalog.component').then(m => m.DatasetCatalogComponent),
   },
-  { path: '**', redirectTo: 'dashboard/india' },
+  {
+    path: 'country/:country/datasets/:datasetId',
+    loadComponent: () => import('./fp/dataset-host/dataset-host.component').then(m => m.DatasetHostComponent),
+  },
+  { path: '**', redirectTo: 'countries' },
 ];

@@ -12,7 +12,7 @@ import { DatasetSummary } from '../../services/data.service';
   template: `
     <mat-card class="dataset-card"
       [class.coming-soon]="dataset.status === 'coming-soon'"
-      [routerLink]="dataset.status !== 'coming-soon' ? ['/dashboard', country, 'dataset', dataset.id] : null">
+      [routerLink]="dataset.status !== 'coming-soon' ? ['/country', country, 'datasets', dataset.id] : null">
 
       <mat-card-header>
         <mat-icon mat-card-avatar class="card-icon">{{ dataset.icon }}</mat-icon>

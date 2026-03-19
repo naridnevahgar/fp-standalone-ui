@@ -1,27 +1,108 @@
-# FpUi
+# FP UI
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.5.
+Macro economics data analyzer UI for investors. The app is structured around a country-first journey and dataset-specific experiences.
 
-## Development server
+## Core Product Flow
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+1. Select a country.
+2. View dataset catalog for that country.
+3. Open a dataset-specific experience.
 
-## Code scaffolding
+Current route flow:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- `/countries`
+- `/country/:country/datasets`
+- `/country/:country/datasets/:datasetId`
 
-## Build
+## Opinions and Assumptions
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- Dataset visualization is opinionated and owned by each dataset feature.
+- A given dataset behaves the same across countries; only the source data changes.
+- Dataset experiences are feature-scoped, not shared generic chart screens.
+- If a dataset exists in catalog data but is not implemented as a feature, show `Coming Soon`.
 
-## Running unit tests
+## Tech Stack
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- Angular 17 (standalone components)
+- Angular Material
+- Signals for local UI state
+- Chart.js + ng2-charts for dataset visualizations
+- Static JSON assets as data source (`src/assets/data/...`)
 
-## Running end-to-end tests
+## Project Structure
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```text
+src/app/
+	app.component.ts
+	app.config.ts
+	app.routes.ts
+	components/
+		navbar/
+			navbar.component.ts
+	fp/
+		country-selection/
+			country-selection.component.ts
+		dataset-catalog/
+			dataset-catalog.component.ts
+			dataset-card.component.ts
+		dataset-host/
+			dataset-host.component.ts
+		datasets/
+			dataset-registry.ts
+			eight-core-industries/
+				eight-core-industries.component.ts
+				eight-core-industries-data.service.ts
+	services/
+		data.service.ts
+		theme.service.ts
+```
 
-## Further help
+## Data and Service Model
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+- `DataService` (`src/app/services/data.service.ts`) is the shared base data access layer:
+	- `getCountryDatasets(country)` -> catalog file (`datasets.json`)
+	- `getDatasetDetail(country, datasetId)` -> dataset detail file (`{datasetId}.json`)
+- Dataset features can wrap `DataService` with dataset-specific services.
+	- Example: `EightCoreIndustriesDataService`.
+
+## Dataset Ownership Model
+
+- Catalog and cards are shared within the `dataset-catalog` feature.
+- Each dataset has its own folder under `fp/datasets/{dataset-id}/`.
+- Dataset feature registration lives in `fp/datasets/dataset-registry.ts`.
+- `dataset-host` resolves which dataset component to render from registry.
+
+## Development
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run dev server:
+
+```bash
+npm start
+```
+
+Build production bundle:
+
+```bash
+npm run build
+```
+
+## How to Add a New Dataset Experience
+
+1. Add/verify dataset metadata in country catalog JSON:
+	 - `src/assets/data/{country}/datasets.json`
+2. Add dataset detail JSON:
+	 - `src/assets/data/{country}/{dataset-id}.json`
+3. Create dataset feature folder:
+	 - `src/app/fp/datasets/{dataset-id}/`
+4. Implement dataset component and optional dataset-specific service.
+5. Register component in:
+	 - `src/app/fp/datasets/dataset-registry.ts`
+
+If step 5 is skipped, the catalog entry remains visible and host shows `Coming Soon`.
+

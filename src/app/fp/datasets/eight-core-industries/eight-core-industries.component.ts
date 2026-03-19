@@ -1,7 +1,8 @@
-import { Component, inject, OnInit, signal, computed } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
-import { DataService, DatasetDetail, MonthlyEntry } from '../../services/data.service';
-import { ThemeService } from '../../services/theme.service';
+import { Component, Input, computed, inject, OnInit, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { DatasetDetail, MonthlyEntry } from '../../../services/data.service';
+import { ThemeService } from '../../../services/theme.service';
+import { EightCoreIndustriesDataService } from './eight-core-industries-data.service';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -15,7 +16,7 @@ import { ChartConfiguration, ChartData } from 'chart.js';
 import { DecimalPipe } from '@angular/common';
 
 @Component({
-  selector: 'app-dataset-detail',
+  selector: 'app-eight-core-industries',
   standalone: true,
   imports: [
     MatCardModule, MatIconModule, MatButtonModule, MatTableModule,
@@ -32,8 +33,8 @@ import { DecimalPipe } from '@angular/common';
         <section class="top-half">
           <!-- Breadcrumb -->
           <div class="breadcrumb">
-            <a [routerLink]="['/dashboard', detail()!.country]" class="back-link">
-              <mat-icon>arrow_back</mat-icon> Dashboard
+            <a [routerLink]="['/country', detail()!.country, 'datasets']" class="back-link">
+              <mat-icon>arrow_back</mat-icon> {{ formatCountryName(detail()!.country) }} Datasets
             </a>
             <span class="crumb-sep">/</span>
             <span>{{ detail()!.shortName }}</span>
@@ -286,9 +287,10 @@ import { DecimalPipe } from '@angular/common';
     }
   `]
 })
-export class DatasetDetailComponent implements OnInit {
-  private route = inject(ActivatedRoute);
-  private dataService = inject(DataService);
+export class EightCoreIndustriesComponent implements OnInit {
+  @Input({ required: true }) country = 'india';
+
+  private dataService = inject(EightCoreIndustriesDataService);
   private themeService = inject(ThemeService);
 
   loading = signal(true);
@@ -566,9 +568,7 @@ export class DatasetDetailComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    const country = this.route.snapshot.paramMap.get('country') ?? 'india';
-    const datasetId = this.route.snapshot.paramMap.get('datasetId') ?? '';
-    this.dataService.getDatasetDetail(country, datasetId).subscribe({
+    this.dataService.getDetail(this.country).subscribe({
       next: (result) => {
         this.detail.set(result);
         const validMonthly = result.monthly
@@ -620,5 +620,15 @@ export class DatasetDetailComponent implements OnInit {
     if (value === null || value === undefined) return '—';
     const sign = value > 0 ? '+' : '';
     return `${sign}${value}%`;
+  }
+
+  formatCountryName(countryCode: string | null | undefined): string {
+    if (!countryCode) return 'Country';
+
+    return countryCode
+      .split('-')
+      .filter(Boolean)
+      .map((segment) => segment.charAt(0).toUpperCase() + segment.slice(1).toLowerCase())
+      .join(' ');
   }
 }
