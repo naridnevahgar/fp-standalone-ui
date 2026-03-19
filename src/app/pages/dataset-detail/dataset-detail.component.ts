@@ -93,7 +93,7 @@ import { DecimalPipe } from '@angular/common';
               <div class="chart-container">
                 <mat-card>
                   <mat-card-header>
-                    <mat-card-title>Monthly Index & Growth Rate (Last 13 months)</mat-card-title>
+                    <mat-card-title>Monthly Index & Growth Rate</mat-card-title>
                   </mat-card-header>
                   <mat-card-content>
                     <canvas baseChart
@@ -175,6 +175,28 @@ import { DecimalPipe } from '@angular/common';
                 </div>
               } @else {
                 <div class="chart-container">
+                  <div class="line-range-controls">
+                    <label class="range-field">
+                      <span>From</span>
+                      <select #startSelect [value]="effectiveMonthlyRangeStart() ?? ''" (change)="onMonthlyRangeStartChange(startSelect.value)">
+                        @for (option of monthlyRangeOptions(); track option.period) {
+                          <option [value]="option.period">{{ option.label }}</option>
+                        }
+                      </select>
+                    </label>
+
+                    <label class="range-field">
+                      <span>To</span>
+                      <select #endSelect [value]="effectiveMonthlyRangeEnd() ?? ''" (change)="onMonthlyRangeEndChange(endSelect.value)">
+                        @for (option of monthlyRangeOptions().reverse(); track option.period) {
+                          <option [value]="option.period">{{ option.label }}</option>
+                        }
+                      </select>
+                    </label>
+
+                    <button mat-stroked-button type="button" (click)="resetMonthlyRange()">Reset</button>
+                  </div>
+
                   <mat-card>
                     <mat-card-header>
                       <mat-card-title>Monthly YoY Growth by Sector</mat-card-title>
@@ -239,6 +261,29 @@ import { DecimalPipe } from '@angular/common';
     .table-container { overflow-x: auto; padding: 16px 0; }
     .data-table { width: 100%; }
     .prov-chip { font-size: 0.7rem; margin-left: 4px; }
+
+    .line-range-controls {
+      display: flex;
+      align-items: flex-end;
+      gap: 12px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+    .range-field {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 0.8rem;
+      opacity: 0.85;
+    }
+    .range-field select {
+      min-width: 140px;
+      padding: 6px 8px;
+      border-radius: 6px;
+      border: 1px solid rgba(128,128,128,0.4);
+      background: transparent;
+      color: inherit;
+    }
   `]
 })
 export class DatasetDetailComponent implements OnInit {
@@ -249,6 +294,8 @@ export class DatasetDetailComponent implements OnInit {
   loading = signal(true);
   detail = signal<DatasetDetail | null>(null);
   monthlyView = signal<'table' | 'chart'>('table');
+  monthlyRangeStart = signal<string | null>(null);
+  monthlyRangeEnd = signal<string | null>(null);
 
   latestEntry = computed<MonthlyEntry | undefined>(() => {
     const d = this.detail();
@@ -268,11 +315,54 @@ export class DatasetDetailComponent implements OnInit {
     return ['period', 'overall-index', 'overall-growth', ...d.sectors.map(s => s.id)];
   });
 
+  monthlyRangeOptions = computed(() => {
+    const d = this.detail();
+    if (!d) return [] as Array<{ period: string; label: string }>;
+    return d.monthly
+      .filter((m): m is MonthlyEntry & { period: string; label: string } => Boolean(m.period && m.label))
+      .sort((a, b) => a.period.localeCompare(b.period))
+      .map(m => ({ period: m.period, label: m.label }));
+  });
+
+  effectiveMonthlyRangeStart = computed(() => {
+    const options = this.monthlyRangeOptions();
+    if (!options.length) return null;
+
+    const start = this.monthlyRangeStart();
+    if (start && options.some(o => o.period === start)) return start;
+    return options[0].period;
+  });
+
+  effectiveMonthlyRangeEnd = computed(() => {
+    const options = this.monthlyRangeOptions();
+    if (!options.length) return null;
+
+    const end = this.monthlyRangeEnd();
+    if (end && options.some(o => o.period === end)) return end;
+
+    return options[options.length - 1].period;
+  });
+
+  filteredMonthly = computed(() => {
+    const d = this.detail();
+    if (!d) return [] as MonthlyEntry[];
+
+    const start = this.effectiveMonthlyRangeStart();
+    const end = this.effectiveMonthlyRangeEnd();
+
+    if (!start || !end) return d.monthly;
+    return d.monthly.filter(m => m.period >= start && m.period <= end);
+  });
+
   // -- Chart colors --
   private sectorColors = [
-    '#42a5f5', '#ef5350', '#66bb6a', '#ffa726',
-    '#ab47bc', '#26c6da', '#8d6e63', '#ffee58',
+    '#b942f5', '#5072ef', '#74c6af', '#ffa726',
+    '#db2b5d', '#26c6da', '#65ea31', '#ffee58',
   ];
+
+  private getSectorColor(index: number): string {
+    return this.sectorColors[index % this.sectorColors.length];
+  }
 
   // -- Overall Trend Chart (combo: bar for index, line for growth) --
   overallChartData = computed<ChartData<'bar'>>(() => {
@@ -335,7 +425,7 @@ export class DatasetDetailComponent implements OnInit {
       labels: d.sectors.map(s => s.name),
       datasets: [{
         data: d.sectors.map(s => s.weight),
-        backgroundColor: this.sectorColors,
+        backgroundColor: d.sectors.map((_, i) => this.getSectorColor(i)),
         borderWidth: 0,
       }],
     };
@@ -425,14 +515,14 @@ export class DatasetDetailComponent implements OnInit {
   monthlySectorLineData = computed<ChartData<'line'>>(() => {
     const d = this.detail();
     if (!d) return { labels: [], datasets: [] };
-    const months = d.monthly;
+    const months = this.filteredMonthly();
     return {
       labels: months.map(m => m.label),
       datasets: d.sectors.map((s, i) => ({
         label: s.name,
         data: months.map(m => m.growth[s.id]),
-        borderColor: this.sectorColors[i % this.sectorColors.length],
-        backgroundColor: this.sectorColors[i % this.sectorColors.length],
+        borderColor: this.getSectorColor(i),
+        backgroundColor: this.getSectorColor(i),
         pointRadius: 3,
         tension: 0.3,
         fill: false,
@@ -451,7 +541,25 @@ export class DatasetDetailComponent implements OnInit {
         x: { ticks: { color: textColor }, grid: { color: gridColor } },
       },
       plugins: {
-        legend: { labels: { color: textColor, usePointStyle: true, padding: 16 } },
+        legend: {
+          labels: {
+            color: textColor,
+            usePointStyle: true,
+            padding: 16,
+            generateLabels: (chart) => {
+              return chart.data.datasets.map((dataset, i) => ({
+                text: String(dataset.label ?? `Sector ${i + 1}`),
+                fillStyle: this.getSectorColor(i),
+                strokeStyle: this.getSectorColor(i),
+                fontColor: textColor,
+                lineWidth: 2,
+                pointStyle: 'circle',
+                hidden: !chart.isDatasetVisible(i),
+                datasetIndex: i,
+              }));
+            },
+          },
+        },
         tooltip: { callbacks: { label: (ctx) => `${ctx.dataset.label}: ${ctx.parsed.y}%` } },
       },
     };
@@ -463,10 +571,38 @@ export class DatasetDetailComponent implements OnInit {
     this.dataService.getDatasetDetail(country, datasetId).subscribe({
       next: (result) => {
         this.detail.set(result);
+        const validMonthly = result.monthly
+          .filter((m): m is MonthlyEntry & { period: string; label: string } => Boolean(m.period && m.label))
+          .sort((a, b) => a.period.localeCompare(b.period));
+        this.monthlyRangeStart.set(validMonthly[0]?.period ?? null);
+        this.monthlyRangeEnd.set(validMonthly[validMonthly.length - 1]?.period ?? null);
         this.loading.set(false);
       },
       error: () => this.loading.set(false),
     });
+  }
+
+  onMonthlyRangeStartChange(period: string): void {
+    this.monthlyRangeStart.set(period);
+
+    const end = this.effectiveMonthlyRangeEnd();
+    if (!end) return;
+    if (period > end) this.monthlyRangeEnd.set(period);
+  }
+
+  onMonthlyRangeEndChange(period: string): void {
+    this.monthlyRangeEnd.set(period);
+
+    const start = this.effectiveMonthlyRangeStart();
+    if (!start) return;
+    if (period < start) this.monthlyRangeStart.set(period);
+  }
+
+  resetMonthlyRange(): void {
+    const options = this.monthlyRangeOptions();
+    if (!options.length) return;
+    this.monthlyRangeStart.set(options[0].period);
+    this.monthlyRangeEnd.set(options[options.length - 1].period);
   }
 
   getOverallTrendClass(): string {
