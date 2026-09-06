@@ -4,6 +4,7 @@ import { ImportExportComponent } from './import-export/import-export.component';
 import { IipItemChartsComponent } from './iip-item-charts/iip-item-charts.component';
 import { StockComparisonComponent } from './stock-comparison/stock-comparison.component';
 import { HlAnalysisComponent } from './hl-analysis/hl-analysis.component';
+import { IipItemLevelComponent } from './iip-item-level/iip-item-level.component';
 
 interface DatasetExperience {
   component?: Type<unknown>;
@@ -24,6 +25,9 @@ const DATASET_EXPERIENCES: Record<string, DatasetExperience> = {
   },
   'hl-analysis': {
     component: HlAnalysisComponent,
+  },
+  'iip-item-level': {
+    component: IipItemLevelComponent,
   },
 };
 

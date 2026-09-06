@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 
@@ -62,6 +62,34 @@ export interface CountryDatasets {
   datasets: DatasetSummary[];
 }
 
+export interface IipSeriesEntry {
+  period: string;
+  label: string;
+  value: number;
+  provisional?: boolean;
+  momPercent: number | null;
+  yoyPercent: number | null;
+}
+
+export interface IipLine {
+  id: string;
+  label: string;
+  nic2: string;
+  nic2Name: string;
+  nic5: number | null;
+  itemCount: number;
+  unit: string | null;
+  series: IipSeriesEntry[];
+}
+
+export interface IipItemsResponse {
+  level: 'nic2' | 'nic5' | 'item';
+  count: number;
+  earliestPeriod: string | null;
+  latestPeriod: string | null;
+  lines: IipLine[];
+}
+
 @Injectable({ providedIn: 'root' })
 export class DataService {
   private http = inject(HttpClient);
@@ -73,5 +101,19 @@ export class DataService {
 
   getDatasetDetail(country: string, datasetId: string): Observable<DatasetDetail> {
     return this.http.get<DatasetDetail>(`${this.basePath}/${country}/${datasetId}`);
+  }
+
+  getIipItems(
+    nic2?: string | null,
+    nic5?: number | null,
+    startDate?: string | null,
+    endDate?: string | null,
+  ): Observable<IipItemsResponse> {
+    let params = new HttpParams();
+    if (nic2) params = params.set('nic2', nic2);
+    if (nic5 != null) params = params.set('nic5', nic5);
+    if (startDate) params = params.set('start_date', startDate);
+    if (endDate) params = params.set('end_date', endDate);
+    return this.http.get<IipItemsResponse>(`${environment.apiUrl}/iip-items`, { params });
   }
 }
